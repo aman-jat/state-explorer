@@ -95,7 +95,7 @@ var StateExplorer = ({ store, reducerName }) => {
   if (window.location.hostname !== "localhost") {
     return null;
   }
-  return /* @__PURE__ */ jsx2("div", { children: /* @__PURE__ */ jsx2(
+  return /* @__PURE__ */ jsx2(
     StateExplorerModal_default,
     {
       reducerName,
@@ -103,7 +103,7 @@ var StateExplorer = ({ store, reducerName }) => {
       isOpen: isModalOpen,
       onClose: () => setIsModalOpen(false)
     }
-  ) });
+  );
 };
 var StateExplorer_default = memo2(StateExplorer);
 
@@ -112,3 +112,4 @@ var index_default = StateExplorer_default;
 export {
   index_default as default
 };
+//# sourceMappingURL=index.mjs.map

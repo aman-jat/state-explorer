@@ -1,6 +1,6 @@
 import { memo, useEffect, useRef, useState } from 'react';
 import StateExplorerModal from './StateExplorerModal';
-import './state.css';
+import './index.css';
 
 const StateExplorer = ({ store, reducerName }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,14 +38,12 @@ const StateExplorer = ({ store, reducerName }) => {
   }
 
   return (
-    <div>
-      <StateExplorerModal
-        reducerName={reducerName}
-        store={store}
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
-    </div>
+    <StateExplorerModal
+      reducerName={reducerName}
+      store={store}
+      isOpen={isModalOpen}
+      onClose={() => setIsModalOpen(false)}
+    />
   );
 };
 
