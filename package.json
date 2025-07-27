@@ -1,6 +1,6 @@
 {
   "name": "state-explorer",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Redux state varible state explorer by Aman Jat",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -18,7 +18,10 @@
   ],
   "author": "Aman Jat",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-json-view": "^1.21.3"
+  },
   "devDependencies": {
     "tsup": "^8.5.0"
   }
