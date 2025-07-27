@@ -1,0 +1,79 @@
+/* src/state.css */
+.state-explorer-backdrop {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+.state-explorer-container {
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  width: 90%;
+  max-width: 768px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  height: 80vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.state-explorer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.state-explorer-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+.state-explorer-subtitle {
+  font-size: 70%;
+  color: rgba(0, 0, 0, 0.31);
+}
+.state-explorer-close {
+  cursor: pointer;
+  color: #dc2626;
+  font-weight: bold;
+  border-radius: 9999px;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  background-color: transparent;
+  border: none;
+}
+.state-explorer-close:hover {
+  color: white;
+  background-color: #dc2626;
+}
+.state-explorer-search {
+  width: 100%;
+  border: 1px solid #1da34420;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 0.375rem;
+  outline-width: 1px;
+  outline-color: #1da34460;
+}
+.state-explorer-json {
+  max-height: 60vh;
+  overflow-y: auto;
+  border: 1px solid #1da34420;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+}
+.state-explorer-json::-webkit-scrollbar {
+  width: 8px;
+}
+.state-explorer-json::-webkit-scrollbar-thumb {
+  background-color: #1da344a0;
+  border-radius: 4px;
+}

@@ -1,3 +1,3 @@
-import Logic from './src/Logic';
+import StateExplorer from './src/StateExplorer';
 
-export default Logic;
+export default StateExplorer;
