@@ -1,5 +1,6 @@
 import { memo, useEffect, useRef, useState } from 'react';
 import StateExplorerModal from './StateExplorerModal';
+import './state.css';
 
 const StateExplorer = ({ store, reducerName }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
