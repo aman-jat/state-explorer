@@ -1,6 +1,6 @@
 {
   "name": "state-explorer",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "type": "module",
   "description": "Redux state varible state explorer by Aman Jat",
   "main": "dist/index.js",
