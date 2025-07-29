@@ -26,32 +26,34 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 ));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// index.ts
+// index.js
 var index_exports = {};
 __export(index_exports, {
   default: () => index_default
 });
 module.exports = __toCommonJS(index_exports);
 
-// src/StateExplorer.tsx
-var import_react2 = require("react");
-
-// src/StateExplorerModal.tsx
+// src/StateExplorer.jsx
 var import_react = require("react");
 var import_react_json_view = __toESM(require("react-json-view"), 1);
-var import_index = require("./index-FPD2UV4X.css");
-var import_jsx_runtime = require("react/jsx-runtime");
-var StateExplorerModal = ({
-  isOpen,
-  onClose,
-  store,
-  reducerName
-}) => {
+var StateExplorer = ({ store, reducerName }) => {
+  const [isModalOpen, setIsModalOpen] = (0, import_react.useState)(false);
+  const onClose = useCallback(() => setIsModalOpen(false), []);
+  (0, import_react.useEffect)(() => {
+    const handleKeyDown = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "p") {
+        e.preventDefault();
+        setIsModalOpen(true);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
   const state = reducerName ? store.getState()[reducerName] : store.getState();
   const [searchKey, setSearchKey] = (0, import_react.useState)("");
   const [debouncedSearchKey, setDebouncedSearchKey] = (0, import_react.useState)(searchKey);
   const [filteredState, setFilteredState] = (0, import_react.useState)(state);
-  const modalRef = (0, import_react.useRef)(null);
+  const modalRef2 = (0, import_react.useRef)(null);
   (0, import_react.useEffect)(() => {
     const handler = setTimeout(() => {
       setDebouncedSearchKey(searchKey);
@@ -60,7 +62,7 @@ var StateExplorerModal = ({
   }, [searchKey]);
   (0, import_react.useEffect)(() => {
     const handleClickOutside = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
+      if (modalRef2.current && !modalRef2.current.contains(event.target)) {
         onClose();
       }
     };
@@ -96,80 +98,31 @@ var StateExplorerModal = ({
       );
     }
   }, [debouncedSearchKey, state]);
-  if (!isOpen) return null;
-  return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "state-explorer-backdrop", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { ref: modalRef, className: "state-explorer-container", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "state-explorer-header", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { className: "state-explorer-title", children: "State Explorer" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "state-explorer-subtitle", children: "Powered by AJ3" })
-      ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
-        "button",
-        {
-          onClick: onClose,
-          className: "state-explorer-close",
-          "aria-label": "Close",
-          children: "\xD7"
-        }
-      )
-    ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
-      "input",
-      {
-        type: "text",
-        placeholder: "Search path (e.g., user.name)",
-        className: "state-explorer-search",
-        value: searchKey,
-        onChange: (e) => setSearchKey(e.target.value),
-        autoFocus: true
-      }
-    ),
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "state-explorer-json", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_react_json_view.default, { src: filteredState, collapsed: 2 }) })
-  ] }) });
-};
-var StateExplorerModal_default = (0, import_react.memo)(StateExplorerModal);
-
-// src/StateExplorer.tsx
-var import_index2 = require("./index-FPD2UV4X.css");
-var import_jsx_runtime2 = require("react/jsx-runtime");
-var StateExplorer = ({ store, reducerName }) => {
-  const [isModalOpen, setIsModalOpen] = (0, import_react2.useState)(false);
-  const modalRef = (0, import_react2.useRef)();
-  (0, import_react2.useEffect)(() => {
-    const handleKeyDown = (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "p") {
-        e.preventDefault();
-        setIsModalOpen(true);
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
-  (0, import_react2.useEffect)(() => {
-    const handleClickOutside = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        setIsModalOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [setIsModalOpen]);
+  if (!isModalOpen) return null;
   if (window.location.hostname !== "localhost") {
     return null;
   }
-  return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-    StateExplorerModal_default,
+  return /* @__PURE__ */ React.createElement("div", { className: "state-explorer-backdrop" }, /* @__PURE__ */ React.createElement("div", { ref: modalRef2, className: "state-explorer-container" }, /* @__PURE__ */ React.createElement("div", { className: "state-explorer-header" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h2", { className: "state-explorer-title" }, "State Explorer"), /* @__PURE__ */ React.createElement("p", { className: "state-explorer-subtitle" }, "Powered by AJ3")), /* @__PURE__ */ React.createElement(
+    "button",
     {
-      reducerName,
-      store,
-      isOpen: isModalOpen,
-      onClose: () => setIsModalOpen(false)
+      onClick: onClose,
+      className: "state-explorer-close",
+      "aria-label": "Close"
+    },
+    "\xD7"
+  )), /* @__PURE__ */ React.createElement(
+    "input",
+    {
+      type: "text",
+      placeholder: "Search path (e.g., user.name)",
+      className: "state-explorer-search",
+      value: searchKey,
+      onChange: (e) => setSearchKey(e.target.value),
+      autoFocus: true
     }
-  );
+  ), /* @__PURE__ */ React.createElement("div", { className: "state-explorer-json" }, /* @__PURE__ */ React.createElement(import_react_json_view.default, { src: filteredState, collapsed: 2 }))));
 };
-var StateExplorer_default = (0, import_react2.memo)(StateExplorer);
+var StateExplorer_default = (0, import_react.memo)(StateExplorer);
 
-// index.ts
-var import_src = require("./index-FPD2UV4X.css");
+// index.js
 var index_default = StateExplorer_default;
-//# sourceMappingURL=index.cjs.map

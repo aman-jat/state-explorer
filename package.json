@@ -2,31 +2,31 @@
   "name": "state-explorer",
   "version": "0.0.10",
   "type": "module",
-  "description": "Redux state varible state explorer by Aman Jat",
+  "author": "Aman Jat",
+  "license": "MIT",
+  "description": "Redux state variable state explorer by Aman Jat",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "build": "tsup index.ts --format esm,cjs --dts"
-  },
   "files": [
     "dist",
     "src/index.css"
   ],
+  "scripts": {
+    "build": "tsup index.js --format esm,cjs"
+  },
+  "dependencies": {
+    "react-json-view": "^1.21.3"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.0"
+  },
   "keywords": [
     "state-explorer",
     "redux",
     "redux react",
     "state viewer"
-  ],
-  "author": "Aman Jat",
-  "license": "MIT",
-  "dependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-json-view": "^1.21.3",
-    "typescript": "^5.8.3"
-  },
-  "devDependencies": {
-    "tsup": "^8.5.0"
-  }
+  ]
 }

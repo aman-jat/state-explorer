@@ -1,25 +1,30 @@
-import { useEffect, useState, useRef, memo } from 'react';
-import ReactJson from 'react-json-view';
+import { memo, useEffect, useRef, useState } from 'react';
 import './index.css';
+import ReactJson from 'react-json-view';
 
-const StateExplorerModal = ({
-  isOpen,
-  onClose,
-  store,
-  reducerName,
-}: {
-  isOpen: boolean;
-  onClose: () => void;
-  store: any;
-  mergeAllReducers?: boolean;
-  reducerName?: string;
-}) => {
+const StateExplorer = ({ store, reducerName }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const onClose = useCallback(() => setIsModalOpen(false), []);
+
+  useEffect(() => {
+    const handleKeyDown = e => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'p') {
+        e.preventDefault();
+        setIsModalOpen(true);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   const state = reducerName ? store.getState()[reducerName] : store.getState();
 
   const [searchKey, setSearchKey] = useState('');
   const [debouncedSearchKey, setDebouncedSearchKey] = useState(searchKey);
   const [filteredState, setFilteredState] = useState(state);
-  const modalRef = useRef<HTMLDivElement>(null);
+  const modalRef2 = useRef(null);
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -30,11 +35,8 @@ const StateExplorerModal = ({
   }, [searchKey]);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        modalRef.current &&
-        !modalRef.current.contains(event.target as Node)
-      ) {
+    const handleClickOutside = event => {
+      if (modalRef2.current && !modalRef2.current.contains(event.target)) {
         onClose();
       }
     };
@@ -42,11 +44,11 @@ const StateExplorerModal = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [onClose]);
 
-  const filterByPath = (obj: any, search: string) => {
-    const result: any = {};
+  const filterByPath = (obj, search) => {
+    const result = {};
 
     const recursiveFilter = (
-      currentObj: any,
+      currentObj,
       currentPath = '',
       resultRef = result
     ) => {
@@ -80,11 +82,16 @@ const StateExplorerModal = ({
     }
   }, [debouncedSearchKey, state]);
 
-  if (!isOpen) return null;
+  if (!isModalOpen) return null;
+
+  // return nothing if user is not on localhost
+  if (window.location.hostname !== 'localhost') {
+    return null;
+  }
 
   return (
     <div className='state-explorer-backdrop'>
-      <div ref={modalRef} className='state-explorer-container'>
+      <div ref={modalRef2} className='state-explorer-container'>
         <div className='state-explorer-header'>
           <div>
             <h2 className='state-explorer-title'>State Explorer</h2>
@@ -113,4 +120,4 @@ const StateExplorerModal = ({
   );
 };
 
-export default memo(StateExplorerModal);
+export default memo(StateExplorer);
